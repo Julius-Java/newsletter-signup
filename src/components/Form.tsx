@@ -1,15 +1,20 @@
 import {useForm} from "react-hook-form"
+import Button from "./Button"
+import { useContext } from "react"
+import pageContext from "../context"
 
 interface IFormInput {
     email: string
 }
 
 const Form = () => {
+    const {setNextPage} = useContext(pageContext)
+
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>({mode: "all"})
 
 
     return (
-        <form className="mt-5" onSubmit={handleSubmit((data) => {console.log(data)})}>
+        <form className="mt-5" onSubmit={handleSubmit(() => {setNextPage(true)})}>
             <div className="flex justify-between items-center">
                 <label className="block text-sm font-bold my-2" htmlFor="Email">Email address</label>
                 <span className={"block text-[10px] font-bold text-primary-tomato"}>{errors.email?.message}</span>
@@ -29,7 +34,7 @@ const Form = () => {
                     })
                 }
             />
-            <button className="h-14 bg-neutral-slateGrey text-white w-full rounded-lg font-bold text-xs sm:mb-3 transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-primary-pinkTomato/100 to-primary-tomato/100 hover:shadow-3xl shadow-primary-tomato  ">Subscribe to monthly newsletter</button>
+            <Button text="Subscribe to monthly newsletter" />
         </form>
     )
 }
