@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  body {
+    @apply font-robotoRegular text-neutral-slateGrey;
+  }
+
+  h1, h2, h3 {
+    @apply font-bold;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+
+  #root {
+    @apply w-full min-h-screen bg-neutral-slateGrey md:flex md:flex-col
+    md:items-center md:justify-center;
+  }
+}
+
+/* Regular */
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("/assets/fonts/Roboto-Regular.ttf") format('truettype');
+}
+
+/* Bold */
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url("/assets/fonts/Roboto-Bold.ttf") format('truettype');
+
+}
