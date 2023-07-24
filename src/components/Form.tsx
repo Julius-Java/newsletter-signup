@@ -8,13 +8,17 @@ interface IFormInput {
 }
 
 const Form = () => {
-    const {setNextPage} = useContext(pageContext)
+    // Update context with page status and user email
+    const {setNextPage, setUserEmail} = useContext(pageContext)
 
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>({mode: "all"})
 
 
     return (
-        <form className="mt-5" onSubmit={handleSubmit(() => {setNextPage(true)})}>
+        <form className="mt-5" onSubmit={handleSubmit((data) => {
+            setNextPage(true);
+            setUserEmail(data?.email)
+        })}>
             <div className="flex justify-between items-center">
                 <label className="block text-sm font-bold my-2" htmlFor="Email">Email address</label>
                 <span className={"block text-[10px] font-bold text-primary-tomato"}>{errors.email?.message}</span>
