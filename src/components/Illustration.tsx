@@ -7,7 +7,7 @@ const Illustration = () => {
         <div className="">
             <picture>
                 <source media="(min-width: 768px)" srcSet={imageDesktop} />
-                <img className="w-full" src={imageMobile}  alt="Image" />
+                <img className="w-full" src={imageMobile}  alt="Image" loading="lazy" />
             </picture>
     </div>
     )

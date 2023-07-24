@@ -1,5 +1,5 @@
 interface ButtonProp {
-    submitType: boolean;
+    submitType?: boolean;
     text: string
 }
 
