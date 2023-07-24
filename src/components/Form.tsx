@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form"
 import Button from "./Button"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import pageContext from "../context"
 
 interface IFormInput {
@@ -11,13 +11,24 @@ const Form = () => {
     // Update context with page status and user email
     const {setNextPage, setUserEmail} = useContext(pageContext)
 
+    // Form input and validation
     const {register, handleSubmit, formState: {errors}} = useForm<IFormInput>({mode: "all"})
+
+    // Capture form submission status and display loading svg
+    const [formSubmitted, setFormSubmitted] = useState(false)
+
+    const delaySetter = () => {
+        setTimeout(() => {
+            setNextPage(true);
+        }, 1000)
+    }
 
 
     return (
         <form className="mt-5" onSubmit={handleSubmit((data) => {
-            setNextPage(true);
-            setUserEmail(data?.email)
+            setUserEmail(data?.email);
+            delaySetter();
+            setFormSubmitted(true)
         })}>
             <div className="flex justify-between items-center">
                 <label className="block text-sm font-bold my-2" htmlFor="Email">Email address</label>
@@ -38,7 +49,7 @@ const Form = () => {
                     })
                 }
             />
-            <Button text="Subscribe to monthly newsletter" />
+            <Button submitType={formSubmitted} text="Subscribe to monthly newsletter" />
         </form>
     )
 }
